@@ -2,19 +2,34 @@ import Guidelines
 import GuidelinesDiagnostics
 
 @GuidelineViolation(
-    .structure.parse_dont_validate.strong_result
+    .parse_dont_validate(.strong_result),
+    reason: "This API establishes a stronger invariant but still exposes a loose representation."
 )
-enum TypoType {
+enum WarningExample {
     case hello
 }
 
-let value: TypoType = .hello
+#if GUIDELINES_DIAGNOSTICS_ERROR_CONCEPT
+
+@GuidelineViolation(
+    .parse_dont_validate(.strong_result),
+    reason: "This concept demonstrates a guideline violation that blocks compilation.",
+    severity: .error
+)
+enum ErrorExample {
+    case blocked
+}
+
+#endif
+
+let value: WarningExample = .hello
 
 print(value)
+
 print(
     Guideline
-        .structure
-        .parse_dont_validate
-        .strong_result
+        .parse_dont_validate(
+            .strong_result
+        )
         .reference
 )

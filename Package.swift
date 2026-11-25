@@ -11,11 +11,15 @@ let package = Package(
     products: [
         .library(
             name: "GuidelinesDiagnostics",
-            targets: ["GuidelinesDiagnostics"]
+            targets: [
+                "GuidelinesDiagnostics",
+            ]
         ),
         .executable(
             name: "guidelines-diagnostics-concept",
-            targets: ["GuidelinesDiagnosticsConcept"]
+            targets: [
+                "GuidelinesDiagnosticsConcept",
+            ]
         ),
     ],
     dependencies: [
@@ -32,6 +36,10 @@ let package = Package(
         .macro(
             name: "GuidelinesDiagnosticsMacros",
             dependencies: [
+                .product(
+                    name: "Guidelines",
+                    package: "Guidelines"
+                ),
                 .product(
                     name: "SwiftSyntax",
                     package: "swift-syntax"
@@ -73,5 +81,7 @@ let package = Package(
             ]
         ),
     ],
-    swiftLanguageModes: [.v6]
+    swiftLanguageModes: [
+        .v6,
+    ]
 )
